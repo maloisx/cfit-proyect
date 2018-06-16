@@ -1,0 +1,58 @@
+<div class="ui-widget-header" style="width: 100%; border: 0px;">
+<table>
+	<tr>
+		<td>
+		<?php 
+			$url = $this->util()->getPath();			
+			$ddatosuserlog = new Zend_Session_Namespace('datosuserlog');
+			$coduser = $ddatosuserlog->cidpers;
+				if($coduser != '' || $coduser != null){
+					echo '
+							<script type="text/javascript">    
+						    $(function(){
+						    	// BUTTON
+						    	$(".fg-button").hover(
+						    		function(){ $(this).removeClass("ui-state-default").addClass("ui-state-focus"); },
+						    		function(){ $(this).removeClass("ui-state-focus").addClass("ui-state-default"); }
+						    	);
+						    	
+						    	// MENU	
+								$("#flat0").menu({ 
+									content: $("#flat0").next().html(), // grab content from this page
+									showSpeed: 400 
+								});
+								$("#flat1").menu({ 
+									content: $("#flat1").next().html(), // grab content from this page
+									showSpeed: 400 
+								});
+						    });
+						    </script>
+    						<table>
+    						<tr>
+	    						<td>
+								<a tabindex="0" href="#" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="flat0"><span class="ui-icon ui-icon-triangle-1-s"></span>Proyectos</a>
+								<div id="search-engines" class="hidden">
+								<ul>
+									<li><a href="'.$url.'index.php/prospectiva/listarproyectos">Mantenimiento Proyectos</a></li>
+								</ul>
+								</div>
+								</td>
+								
+								<td>
+								<a tabindex="0" href="#" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="flat1"><span class="ui-icon ui-icon-triangle-1-s"></span>Personas</a>
+								<div id="search-engines" class="hidden">
+								<ul>
+									<li><a href="'.$url.'index.php/prospectiva/listarpersonas">Mantenimiento Personas</a></li>
+								</ul>
+								</div>
+								</td>
+							</tr>
+							</table>
+						 ';
+					
+				}
+			?>
+		</td>
+	</tr>
+</table>
+</div>

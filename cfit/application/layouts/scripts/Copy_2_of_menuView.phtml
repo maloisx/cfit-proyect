@@ -1,0 +1,90 @@
+<?php $url = $this->util()->getPath();
+$ddatosuserlog = new Zend_Session_Namespace('datosuserlog');
+$codemp = $ddatosuserlog->codemp;
+$ns = 'pkg_appweb.sp_obt_menu';
+$arraydatos[] = array(':p_cod_emp',$codemp);
+$cn = new Model_DataAdapter();
+$datos_menu = $cn->ejec_store_oracle_sisconv($ns,$arraydatos);
+print_r($datos_menu);
+
+function menu_buscar_hijos($datos_menu,$codmenu){
+	for($i=0;$i<count($datos_menu);$i++){	
+			
+		$cod_rol = $datos_menu[$i][0];
+		$desc_rol = $datos_menu[$i][1];
+		
+		$cod_obj = $datos_menu[$i][2];
+	    $desc_obj = $datos_menu[$i][3];
+	    $cod_obj_padre = $datos_menu[$i][4];
+	    $prop_obj = $datos_menu[$i][5];
+	    
+	    $orden = $datos_menu[$i][6];
+	    $cant_hijos = $datos_menu[$i][7];
+	    				
+		if($codmenu == $cod_obj_padre){
+			echo '<li>';
+			echo '<a href="'. (($cant_hijos==0)?'javascript: void(0)':'') .'">'.$desc_obj.'</a>';
+			echo '</li>';
+		}
+		
+	}
+}
+
+?>
+<div id="fondo" style="height: 100%">
+<div style="height: 67px" align="center">
+	<img src="<?php echo $this->util()->getImage("logo.png"); ?>" height="67px">
+</div>	
+	<nav id="menu-wrap">   
+		<ul id="menu">
+<!--			<li><a href="/">Home</a></li>-->
+		
+			<li>
+				<a href="javascript: void(0)">SISCONV</a>
+				<ul>
+						<li>
+							<a href="javascript: void(0)">MANTENIMIENTOS</a>
+							<ul>
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/entidad">Entidad</a>			
+								</li>
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/perconv">Periodo Convenio</a>			
+								</li>
+				
+<!--								<li>-->
+<!--									<a href="<?php echo $url?>index.php/sisconv/respooblig">Responsable Obligaci&oacute;n</a>										-->
+<!--								</li>-->
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/sector">Sector</a>
+								</li>
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/tipconv">Tipo Convenio</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="javascript: void(0)">CONVENIOS</a>
+							<ul>
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/convenio">Mantenimiento Convenio</a>			
+								</li>
+								<li>
+									<a href="<?php echo $url?>index.php/sisconv/evalconv">Evaluacion Convenio</a>			
+								</li>
+							</ul>	
+						</li>
+				</ul>
+				</li>				
+			</li>
+
+
+
+			<li><a href="<?php echo $this->util()->getLink('logeo/logout'); ?>">SALIR</a></li>
+		
+		
+		
+		
+		</ul>
+	</nav>
+</div>

@@ -1,0 +1,62 @@
+<input type="hidden" id="hd_height" value="">
+<input type="hidden" id="hd_mod" value="">
+<div align="center">
+	<table border="1" cellpadding="0" cellspacing="0">
+	    <tr>
+			<td class="ui-state-default">Direcci&oacute;n Regional:</td>
+			<td ><select id="c_dirreg" style="width: 300px"></select></td>
+		</tr>
+		<tr>			
+			<td width="120px" class="ui-state-default">Estaci&oacute;n:</td>
+			<td><select id="c_estacion" style="width: 300px"></select></td>
+		</tr>
+		<tr>			
+			<td width="120px" class="ui-state-default">Hora Sinoptica:</td>
+			<td><select id="c_hora" style="width: 300px"></select></td>
+		</tr>
+	</table>
+	<br>
+	<div align="center">
+	
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>			
+				<td width="210px" >
+					<label for="fecha_ini">Fecha Inicio:</label>
+	                <input id="fecha_ini" value="" readonly="readonly" style="width: 100px" />
+				</td>
+				<td width="210px" >
+					<label for="fecha_fin">Fecha Fin:</label>
+	                <input id="fecha_fin" value=""  readonly="readonly"/ style="width: 100px" >
+				</td>
+			</tr>
+		</table>
+	</div>   
+	<br>
+	<div  align="center"><button id="btn_buscardatos">Buscar Datos</button></div>
+	<br>
+	
+	<div id="div_mensaje" ></div>
+	<div id="tabs">
+	  <ul>
+	    <li><a href="#c_tabs_hidro"><span>Registros Hidrometeorologicos</span></a></li>
+	    <li><a href="#c_tablarpta_meteoros"><span>Meteoros</span></a></li>
+	  </ul>
+	  <div id="c_tabs_hidro" >
+	  			<div id="tabs_hidro">
+				  <ul>
+				    <li><a href="#c_tablarpta_varhidrometeorologicas"><span>DATOS</span></a></li>
+				    <li><a href="#c_tablarpta_llegadadatos"><span>LLEGADA DE DATOS</span></a></li>
+				  </ul>
+				  <div id="c_tablarpta_varhidrometeorologicas" >				  		
+				  </div>
+				  
+				  <div id="c_tablarpta_llegadadatos" >
+				  					  
+				  </div>
+				</div>
+	  </div>
+	  <div id="c_tablarpta_meteoros" >
+	  </div>
+	</div>
+	
+</div>

@@ -1,0 +1,9 @@
+
+Formulario de subida de fotos a Oracle<br><br> 
+Limite de tamaño de subida de fotos 1.024 KB<br> 
+
+<form action="<?php echo $this->util()->getPath();?>index.php/sisconv/pruebasubir" method="post" enctype="multipart/form-data"> 
+Descripción de la imagen: <input type="text" name="lob_description"><br> 
+Abrir Archivo: <input type="file" name="lob_upload"><br><br> 
+<input type="submit" value="Subir Imagen"> - <input type="reset"> 
+</form> 

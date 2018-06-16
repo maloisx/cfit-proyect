@@ -1,0 +1,75 @@
+.bodylogeo {
+    background:#144f8f; font-family:Tahoma, Geneva, sans-serif;
+}
+p,h1,form,fieldset,label,input{
+    border:0;margin:0;padding:0;
+}
+input,select , textarea ,.ingresar{
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-top-left-radius: 7px 7px;
+    border-top-right-radius: 7px 7px;
+    border-bottom-left-radius: 7px 7px;
+    border-bottom-right-radius: 7px 7px;
+}
+input:focus { border: 1px solid #FFB32C; }
+.capc:focus { border: 1px solid #FFB32C; }
+fieldset{	
+    width:340px; margin:auto; overflow:hidden;
+}
+label{		
+    /*width:85px;font-size:12pt;*/ float:left; 	margin:4px 10px 0 5px; color:#333;
+}
+.label_logeo{		
+    width:85px;font-size:12pt; float:left; 	margin:4px 10px 0 5px; color:#333;
+}
+input , select , textarea{		
+    /*float:left;*/ margin:2px 20px 5px 5px; padding:2px 5px; /*color:#B2B2B2; */font-size:1em; border:solid #939393 1px;
+}
+
+.input_logeo{		
+    float:left; margin:2px 20px 5px 5px; padding:2px 5px; /*color:#B2B2B2; */font-size:1em; border:solid #939393 1px;
+}
+
+.input-error{
+    border:solid red 1px;
+}
+.input-error:hover{
+    border:solid red 1px;
+}
+span{		
+   /* color: #BEBBB8; font-size:10px; display:block;*/
+}
+.span_logeo{		
+   color: #BEBBB8; font-size:10px; display:block;
+}
+.cent {
+    background:url(../img/bg_img_login_sisfac.jpg) no-repeat center top;
+    position:absolute; left:50%; top: 50%;
+    width: 800px; height: 620px;
+    margin-top: -310px; margin-left: -400px;
+}
+.cent_tabl{	
+    padding:135px 165px;
+}
+.cont_logi{	
+    background:url(../img/bg_caja_med.png) repeat-y;
+}
+.captcha{width:100px;}
+.ingr{
+    float:left;
+    padding:0;
+    margin:5px 0 0 110px;
+    background:#d0e8f7;
+    color:#418eb6;
+    width:88px;
+    height:33px;
+    border:0;
+    background:url(../img/btn_enviar01.png) no-repeat;
+    font-weight:bold; color: #666; font-size:12px;
+}
+.ingr:hover{ color:#000; background:#418eb6 url(../img/btn_enviar02.png) no-repeat;}
+.mens{  margin:5px 10px 8px 105px; color:#F00; font-size:10px;}
+.requisito{height: 55px;}
+
+.captcha-container{display: inline; width: 85px; height: 36px;}

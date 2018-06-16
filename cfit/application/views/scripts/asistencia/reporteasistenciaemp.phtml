@@ -1,0 +1,67 @@
+<div style="background-color: #144f8f;height: 100%">
+	<div align="center" style="padding-top: 30px;padding-bottom: 30px" >
+	   <div class="demo-section k-content" align="center" style="width: 900px;font-weight: bold;font-size: 20px" id="txt_emp">
+			EMPLEADO xxx			
+		</div>
+		<div class="demo-section k-content" align="right" style="width: 1200px;font-weight: bold;font-size: 20px">
+			<button id="btn_salir">SALIR</button>
+		</div>
+		<div class="demo-section k-content"  style="width: 1200px;font-weight: bold;font-size: 20px">
+			<div id="tabs">
+			  <ul>
+			    <li><a href="#tabs-1">Estadisticas Anuales</a></li>
+			    <li><a href="#tabs-2">Reporte de Asistencias </a></li>
+			  </ul>
+			  <div id="tabs-1">
+			     	<div style="width: 100%;height: 2400px" id="div_reporte_estadistica">
+			     	
+			     					        
+				        <div style="width: 1150px;height: 500px">
+				        	<div id="chart_tardanzas_frecuencia"  class="demo-section k-content" style="width: 47%;float: left"></div>
+				        	<div id="chart_tardanzas_acum_min"  class="demo-section k-content" style="width: 47%;float: right;"></div>
+				        </div>
+				        
+				        <br>
+				        
+				        <div class="demo-section k-content"  style="width: 1150px">
+					        <div id="chart_faltos"></div>
+					    </div> 
+				        
+				        <br>
+			     	
+				     	<div class="demo-section k-content"  style="width: 1150px">
+					        <div id="chart_permisos_personales"></div>
+					    </div> 
+				        
+				        <br>
+				        
+				        <div style="width: 1150px">
+				        	<div id="chart_descanso_medico"  class="demo-section k-content" style="width: 70%;float: left"></div>
+				        	<div id="chart_descanso_medico_acum"  class="demo-section k-content" style="width: 25%;float: right;" ></div>
+				        </div>
+				        
+				        <br> 
+
+				        <div style="width: 1150px">
+				        	<div id="chart_citas_medicas_frecuencia"  class="demo-section k-content" style="width: 47%;float: left"></div>
+				        	<div id="chart_comision_servico_frecuencia"  class="demo-section k-content" style="width: 47%;float: right"></div>
+				        </div>
+
+			     	
+			     	</div>
+			  </div>
+			  <div id="tabs-2">
+			    	<div style="width: 100%" id="div_reporte_asistencia_pdf"></div>
+			  </div>
+			  		
+			</div>			
+		</div>
+		
+	</div>
+</div>
+
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>

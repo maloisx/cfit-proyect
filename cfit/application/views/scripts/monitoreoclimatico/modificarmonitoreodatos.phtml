@@ -1,0 +1,98 @@
+<div align="center">
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr height="20px">
+			<td colspan="7"></td>
+		</tr>
+		<tr height="700px">
+			<td width="20px"></td>
+			<td width="400px" align="center" valign="top" class="demo-section">
+				<div class="ui-state-default ui-corner-all" align="center">Listado de Estaciones</div>				
+				<div id="tree-div" align="left" style="overflow-y:scroll; height:700px;width:96%;padding:10px"></div>				
+			</td>
+			<td width="10px"></td>
+			<td width="1050px" align="center" class="demo-section" valign="top">
+				<div style="width: 730px;" class="demo-section">
+					<label for="cbcriterio">Criterio:</label>
+	                <select id="cbcriterio" style="width: 413px"></select> 
+	                <br><br>
+	                <label for="fecha_ini">Fecha Inicio:</label>
+	                <input id="fecha_ini" value="" readonly="readonly" />
+	
+	                <label for="fecha_fin" style="margin-left:3em">Fecha Fin:</label>
+	                <input id="fecha_fin" value=""  readonly="readonly"/ >
+	                <br><br>
+	                <div align="center">
+		                <div><input type="checkbox" id="nom_estacion" name="nom_estacion" checked="checked"> Mostrar Nombre de Estaciones</div>
+		                <div> <input type="checkbox" id="valor_estacion" name="valor_estacion" checked="checked"> Mostrar Valor de Estaciones</div>
+					</div>
+	               
+	                
+				</div>
+				<div style="width: 1020px;" class="demo-section c_div_mapa" align="left">
+					<div id="c_mapa" style="width: 1020px;height: 590px;margin: 0; padding: 0;">
+						
+					</div>
+				</div>
+			</td>		
+			<td width="20px"></td>
+		</tr>
+		<tr height="5px">
+			<td colspan="7"></td>
+		</tr>
+		<!-- 
+		<tr >
+			<td></td>
+			<td align="center" colspan="5">
+				 <div class="demo-section" style="width:470px">
+				 	<div class="ui-state-default ui-corner-top" align="center">Rango de Fechas</div><br>
+	                <label for="fecha_ini">Fecha Inicio:</label>
+	                <input id="fecha_ini" value="" readonly="readonly" />
+	
+	                <label for="fecha_fin" style="margin-left:3em">Fecha Fin:</label>
+	                <input id="fecha_fin" value=""  readonly="readonly"/ >
+           	 	</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr height="5px">
+			<td colspan="7"></td>
+		</tr>
+		 		
+		<tr>
+			<td></td>
+			<td align="center" colspan="5"><button id="btn_generargrafico">Generar Gr&aacute;fico</button></td>
+			<td></td>
+		</tr>
+		<tr height="5px">
+			<td colspan="7"></td>
+		</tr>
+		-->	
+		<tr >
+			<td></td>
+			<td align="left" colspan="5">
+				<div class="demo-section">
+					 <div id="div_grafico" style="height: 450px; width: 80%;">
+					 	
+	           	 	</div>
+           	 	</div>
+			</td>
+			<td></td>
+		</tr>	
+		<tr height="5px">
+			<td colspan="7"></td>
+		</tr>
+		<tr >
+			<td></td>
+			<td align="center" colspan="5">
+				 <div class="demo-section" id="div_tabladatosestaciones">
+				 	<table width="1100px" border="1" cellpadding="0" cellspacing="0" id="c_tabladatosestaciones">
+					</table>
+           	 	</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr height="20px">
+			<td colspan="7"></td>
+		</tr>
+	</table>
+</div>
