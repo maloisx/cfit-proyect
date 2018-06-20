@@ -5,28 +5,44 @@
 		echo $this->headTitle() . "\n";
 	
 		?>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		
 		<style type="text/css">
 			.printable {
 				border: 1px dotted #CCCCCC ;
 				padding: 10px 10px 10px 10px ;
 			}
 		</style>
-
+	
 		
 		<?php echo $this->util()->getStyle(); ?>
 		<link href="<?php echo $this->util()->getPath(); ?>theme/blue_explora/jquery-ui.css" rel="stylesheet" type="text/css" id="jquery_theme_link" />
 		<link href="<?php echo $this->util()->getImage("refbar.ico"); ?>" rel="shortcut icon" type="image/x-icon" />
 		<link href="<?php echo $this->util()->getImage("refbar.ico"); ?>" rel="icon" type="image/x-icon" />
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=es"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCi3uGbWaukJjhm6WjuStB19XoIslLtvbk"></script>
+		
+		<!-- JQuery -->
+	    <script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>/MDB/js/jquery-3.3.1.min.js"></script>
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <!-- Bootstrap core CSS -->
+	    <link href="<?php echo $this->util()->getPath(); ?>/MDB/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Material Design Bootstrap -->
+	    <link href="<?php echo $this->util()->getPath(); ?>/MDB/css/mdb.min.css" rel="stylesheet">
+	    <!-- Your custom styles (optional) -->
+	    <link href="<?php echo $this->util()->getPath(); ?>/MDB/css/style.css" rel="stylesheet">
+		
+		
+		
 		<?php
-			echo $this->util()->getScript("js/common");			
-			echo $this->util()->getScript("js/jqplot");
+			//echo $this->util()->getScript("js/common");		
 			
 			$controller = $this->util()->getScriptJSController();
 			$controllerAction = $this->util()->getScriptJSControllerAction();
 			$leave = $this->util()->getScriptLeave();
-			
 			if(strlen($controller) > 0) {
+				
 				echo $controller;
 			}
 			
@@ -42,39 +58,31 @@
 		<script type="text/javascript">
 			var path="<?php echo $this->util()->getPath(); ?>";
 
-			jQuery(document).ready(function () {
-				jQuery.scriptPath = "<?php echo $this->util()->getPath(); ?>";
-				jQuery.struts2_jquery.local = "es";
-				jQuery.struts2_jquery.gridLocal = "es";
-				jQuery.struts2_jquery.timeLocal = "en";
-				jQuery.ajaxSettings.traditional = true;
-				jQuery.ajaxSetup({
-					cache: false
-				});
-			});
+//			jQuery(document).ready(function () {
+//				jQuery.scriptPath = "<?php echo $this->util()->getPath(); ?>";
+//				jQuery.struts2_jquery.local = "es";
+//				jQuery.struts2_jquery.gridLocal = "es";
+//				jQuery.struts2_jquery.timeLocal = "en";
+//				jQuery.ajaxSettings.traditional = true;
+//				jQuery.ajaxSetup({
+//					cache: false
+//				});
+//			});			
+//			$(document).ready(function(){
+//				$(document).ajaxStart(function(){
+//					$('#jqDialogCargando').dialog('open');
+//				});
+//				
+//				$(document).ajaxStop(function(){
+//					$('#jqDialogCargando').dialog('close');
+//				});
+//			});
+//
+//			$(function(){
+//				$("input:submit, input:button, input:reset, button").button();
+//			}); 
 			
-			$(document).ready(function(){
-				$(document).ajaxStart(function(){
-					$('#jqDialogCargando').dialog('open');
-				});
-				
-				$(document).ajaxStop(function(){
-					$('#jqDialogCargando').dialog('close');
-				});
-			});
-
-			$(function(){
-				$("input:submit, input:button, input:reset, button").button();
-			});
-		</script>
-			
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util()->getPath(); ?>js/lightbox/themes/default/jquery.lightbox.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util()->getPath(); ?>js/lightbox/themes/default/jquery.lightbox2.css" />
-		<script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>js/lightbox/jquery.lightbox.js"></script>
-		<script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>js/lightbox/jquery.lightbox2.js"></script>
-		<script type="text/javascript">$(document).ready(function(){$('.lightbox').lightbox();});</script>
-		<script type="text/javascript">$(document).ready(function(){$('.lightbox2').lightbox2();});</script>
-		
+		</script>		
 		<link href="<?php echo $this->util()->getPath();?>datatables/css/demo_page.css" rel="stylesheet" />
 		<link href="<?php echo $this->util()->getPath();?>datatables/css/demo_table.css" rel="stylesheet" />
 		<link href="<?php echo $this->util()->getPath();?>datatables/css/TableTools.css" rel="stylesheet" />
@@ -83,42 +91,18 @@
 		<script type="text/javascript" language="javascript" src="<?php echo $this->util()->getPath();?>datatables/js/TableTools.js"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo $this->util()->getPath();?>datatables/js/FixedColumns.js"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo $this->util()->getPath();?>datatables/js/FixedHeader.js"></script>
-		
-		<link href="<?php echo $this->util()->getPath();?>kendo/css/kendo.common.min.css" rel="stylesheet" />
-	    <link href="<?php echo $this->util()->getPath();?>kendo/css/kendo.default.min.css" rel="stylesheet" />
-	    <link href="<?php echo $this->util()->getPath();?>kendo/css/kendo.dataviz.min.css" rel="stylesheet" />
-	    <link href="<?php echo $this->util()->getPath();?>kendo/css/kendo.bootstrap.min.css" rel="stylesheet" />
-	    <link href="<?php echo $this->util()->getPath();?>kendo/css/examples.css" rel="stylesheet" />   
-	    <script src="<?php echo $this->util()->getPath();?>kendo/js/kendo.all.js"></script> 
-	    
-	    <script src="<?php echo $this->util()->getPath();?>kendo/js/console.js"></script>
-	    <script src="<?php echo $this->util()->getPath();?>kendo/js/prettify.js"></script>
 	        
-		<script src="<?php echo $this->util()->getPath();?>kendo/js/kendo.culture.es-PE.js"></script>
-		<script>kendo.culture('es-PE');</script>	
-		<script src="<?php echo $this->util()->getPath();?>kendo/js/kendo_fn.js"></script>
-            
-       		
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util()->getPath();?>tree/css/ext-all.css" />
-		<!--<link rel="stylesheet" type="text/css" href="<?php echo $this->util()->getPath();?>tree/css/examples.css" /> --> 
-		<script type="text/javascript" src="<?php echo $this->util()->getPath();?>tree/js/yui-utilities.js"></script>
-		<script type="text/javascript" src="<?php echo $this->util()->getPath();?>tree/js/ext-yui-adapter.js"></script>
-		<script type="text/javascript" src="<?php echo $this->util()->getPath();?>tree/js/ext-all.js"></script>			    
-	    <script type="text/javascript" src="<?php echo $this->util()->getPath();?>tree/js/AsyncTreeNode.js"></script>			
-		<script type="text/javascript" src="<?php echo $this->util()->getPath();?>tree/js/TreeCheckNode.js"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo $this->util()->getPath();?>tree/css/TreeCheckNode.css" />	 
-       
-       	
-       
 	</head>    
 	<body>
-	
+		<div class="w-screen">
+			    
+		    
 		<?php 
 			$ddatosuserlog = new Zend_Session_Namespace('datosuserlog');
 			$codemp = $ddatosuserlog->codemp;
 	
 			if($codemp == '' || $codemp == null){
-
+				
 				echo $this->layout()->content;
 				
 			}else{
@@ -154,9 +138,16 @@
 				<?php
 			}
 		?>
-	
+		</div>
 		
-		<?php echo $this->render("jqCargando.phtml"); ?>
-		<?php echo $this->render("jqConfirm.phtml"); ?>
+	    <!-- Bootstrap tooltips -->
+	    <script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>/MDB/js/popper.min.js"></script>
+	    <!-- Bootstrap core JavaScript -->
+	    <script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>/MDB/js/bootstrap.min.js"></script>
+	    <!-- MDB core JavaScript -->
+	    <script type="text/javascript" src="<?php echo $this->util()->getPath(); ?>/MDB/js/mdb.js"></script>
+		
+		<?php //echo $this->render("jqCargando.phtml"); ?>
+		<?php //echo $this->render("jqConfirm.phtml"); ?>
 	</body>
 </html>

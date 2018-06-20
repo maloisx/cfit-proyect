@@ -482,20 +482,17 @@ public function SetTitlePag($title) {
 	public function menu_buscar_hijos($datos_menu,$codmenu){
 		
 		$url = $this->util()->getPath();
-		echo '<ul '.(($codmenu=='00000')?' id="menu" ':'').'>';
+		echo '<ul '.(($codmenu=='0')?' id="menu" ':'').'>';
 		
 		for($i=0;$i<count($datos_menu);$i++){	
-				
-			$cod_rol = $datos_menu[$i][0];
-			$desc_rol = $datos_menu[$i][1];
-			
-			$cod_obj = $datos_menu[$i][2];
-		    $desc_obj = $datos_menu[$i][3];
-		    $cod_obj_padre = $datos_menu[$i][4];
-		    $url_obj = $datos_menu[$i][5];
+							
+			$cod_obj = $datos_menu[$i]->cod_menu;
+		    $desc_obj = $datos_menu[$i]->desc_menu;
+		    $cod_obj_padre = $datos_menu[$i]->cod_padre;
+		    $url_obj = $datos_menu[$i]->url;
 		    
-		    $orden = $datos_menu[$i][6];
-		    $cant_hijos = $datos_menu[$i][7];
+		    $orden = $datos_menu[$i]->orden;
+		    $cant_hijos = $datos_menu[$i]->hijos;
 
 			if($codmenu == $cod_obj_padre){
 								

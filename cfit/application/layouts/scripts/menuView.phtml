@@ -1,10 +1,10 @@
 <?php $url = $this->util()->getPath();
 $ddatosuserlog = new Zend_Session_Namespace('datosuserlog');
 $codemp = $ddatosuserlog->codemp;
-$ns = 'pkg_appweb.sp_obt_menu';
-$arraydatos[] = array(':p_cod_emp',$codemp);
+$ns = 'sp_menu';
+$arraydatos[] = $codemp;
 $cn = new Model_DataAdapter();
-$datos_menu = $cn->ejec_store_oracle_sisconv($ns,$arraydatos);
+$datos_menu = $cn->ejec_store_procedura_mysql($ns,$arraydatos);
 //echo $codemp;
 ?>
 <div id="fondo" style="height: 100%">
@@ -12,6 +12,6 @@ $datos_menu = $cn->ejec_store_oracle_sisconv($ns,$arraydatos);
 	<img src="<?php echo $this->util()->getImage("logo.png"); ?>" height="67px">
 </div>	
 	<nav id="menu-wrap">  				
-			<?php  $this->util()->menu_buscar_hijos($datos_menu,'00000'); ?>
+			<?php  $this->util()->menu_buscar_hijos($datos_menu,'0'); ?>
 	</nav>
 </div>

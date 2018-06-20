@@ -1,4 +1,4 @@
-<style>
+
 
 	
 	/* You don't need the above styles, they are demo-specific ----------- */
@@ -66,7 +66,7 @@
 	#menu li:hover > a {
 		color: #fafafa;
 
-		width:180px;
+		width:200px;
 		background-color: #0186ba;
 		background-image: -moz-linear-gradient(#04acec,  #0186ba);	
 		background-image: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
@@ -103,7 +103,7 @@
 		position: absolute;
 		top: 0px;
 		left: 200;
-		z-index: 1;    
+		z-index: 10;    
 		background: transparent;
 		background: -moz-linear-gradient(#444, #111);
 		background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));
@@ -158,7 +158,7 @@
 	
 	#menu ul a {    
 		padding: 10px;
-		width: 180px;
+		width: 200px;
 		_height: 10px; /*IE6 only*/
 		display: block;
 		white-space: nowrap;
@@ -230,4 +230,3 @@
 		border-radius: 0 0 3px 3px;
 	}
 
-	</style>

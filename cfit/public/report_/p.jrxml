@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="p" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1de533f3-6d6f-4132-a8a0-01140d17d668">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_COD_EMP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_FECHA_INI" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_FECHA_FIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+codigo ,  nombre , to_char(d_fec_emp,'dd/mm/yyyy') d_fec_emp  , semana , nro_dia
+, h_entrada
+, h_salida
+, min_trab
+, lpad(floor(min_trab/ 60) , 2 , '0')  || ':' || lpad(min_trab -  (  floor(min_trab/ 60) * 60 ) , 2 , '0')  horas_trab
+, (
+    case when nro_dia in ( 1,2,3,4,5) then
+
+         case when to_date(d_fec_emp ||' 17:15' , 'dd/mm/yyyy hh24:mi') < to_date(d_fec_emp ||' '||h_salida , 'dd/mm/yyyy hh24:mi') then
+                 trunc((to_date(d_fec_emp ||' '||h_salida , 'dd/mm/yyyy hh24:mi') -  to_date(d_fec_emp ||' 17:15' , 'dd/mm/yyyy hh24:mi') )*24*60 )
+         else
+                 0
+         end
+    else
+        trunc((to_date(d_fec_emp ||' '||h_salida , 'dd/mm/yyyy hh24:mi') -  to_date(d_fec_emp ||' '|| h_entrada , 'dd/mm/yyyy hh24:mi') )*24*60 )
+    end
+  ) min_extras,
+(select d.v_nom_depen
+from pemap_emp e , setbp_depen d
+where e.v_cod_emp = codigo
+and e.v_cod_dre = d.v_cod_dre and e.v_cod_depen = d.v_cod_depen) depen,
+(select u.v_nom_unid
+from pemap_emp e , setbp_unid u
+where e.v_cod_emp = codigo
+and e.v_cod_dre = u.v_cod_dre and e.v_cod_depen = u.v_cod_depen and e.v_cod_unid = u.v_cod_unid) unid
+
+from
+(
+select codigo ,  v_app_emp || ' ' || v_apm_emp  || ' ' || v_nom_emp as nombre , d_fec_emp ,to_char(d_fec_emp,'IW') semana,to_char(d_fec_emp,'D') nro_dia
+, h_entrada
+,  h_salida
+,trunc((to_date(d_fec_emp ||' '||h_salida , 'dd/mm/yyyy hh24:mi') -  to_date(d_fec_emp ||' '||h_entrada , 'dd/mm/yyyy hh24:mi') )*24*60 ) min_trab
+
+from
+(
+select e.v_cod_emp codigo, r.v_nta_emp , e.v_nom_emp , e.v_app_emp , e.v_apm_emp , e.v_dni_emp , r.d_fec_emp , min(r.v_hor_emp) h_entrada ,  max(r.v_hor_emp) h_salida
+from petbp_reloj r, PEMAP_EMPD ed , pemap_emp e
+where e.v_cod_emp = ed.v_cod_emp and r.v_nta_emp = ed.v_nta_emp
+--and ed.v_nta_emp = '00918'
+and e.v_cod_emp = $P{P_COD_EMP}
+and r.d_fec_emp between $P{P_FECHA_INI} and $P{P_FECHA_FIN}
+group by e.v_cod_emp , r.v_nta_emp , e.v_nom_emp , e.v_app_emp , e.v_apm_emp , e.v_dni_emp , r.d_fec_emp
+)
+)]]>
+	</queryString>
+	<field name="CODIGO" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="D_FEC_EMP" class="java.lang.String"/>
+	<field name="SEMANA" class="java.lang.String"/>
+	<field name="NRO_DIA" class="java.lang.String"/>
+	<field name="H_ENTRADA" class="java.lang.String"/>
+	<field name="H_SALIDA" class="java.lang.String"/>
+	<field name="MIN_TRAB" class="java.math.BigDecimal"/>
+	<field name="HORAS_TRAB" class="java.lang.String"/>
+	<field name="MIN_EXTRAS" class="java.math.BigDecimal"/>
+	<field name="DEPEN" class="java.lang.String"/>
+	<field name="UNID" class="java.lang.String"/>
+	<variable name="MIN_TRAB_1" class="java.math.BigDecimal" resetType="Group" resetGroup="SEMANA" calculation="Sum">
+		<variableExpression><![CDATA[$F{MIN_TRAB}]]></variableExpression>
+	</variable>
+	<variable name="HORAS_TRAB_TOTAL" class="java.lang.String">
+		<variableExpression><![CDATA[String.format("%02d",(int) Math.floor($V{MIN_TRAB_1} / 60))
++":"+
+String.format("%02d",(int) ($V{MIN_TRAB_1} -  (((int) Math.floor($V{MIN_TRAB_1} / 60)) * 60)))]]></variableExpression>
+	</variable>
+	<variable name="MIN_EXTRAS_1" class="java.math.BigDecimal" resetType="Group" resetGroup="SEMANA" calculation="Sum">
+		<variableExpression><![CDATA[$F{MIN_EXTRAS}]]></variableExpression>
+	</variable>
+	<variable name="HORAS_EXTRAS_TOTAL" class="java.lang.String">
+		<variableExpression><![CDATA[String.format("%02d",(int) Math.floor($V{MIN_EXTRAS_1} / 60)) +":"+ String.format("%02d",(int) ($V{MIN_EXTRAS_1} -  (((int) Math.floor($V{MIN_EXTRAS_1} / 60)) * 60)))]]></variableExpression>
+	</variable>
+	<variable name="HORAS_EXTRAS" class="java.lang.String">
+		<variableExpression><![CDATA[String.format("%02d",(int) Math.floor($F{MIN_EXTRAS} / 60)) +":"+ String.format("%02d",(int) ($F{MIN_EXTRAS} -  (((int) Math.floor($F{MIN_EXTRAS} / 60)) * 60)))]]></variableExpression>
+	</variable>
+	<group name="NOMBRE">
+		<groupExpression><![CDATA[$F{NOMBRE}]]></groupExpression>
+	</group>
+	<group name="SEMANA">
+		<groupExpression><![CDATA[$F{SEMANA}]]></groupExpression>
+		<groupHeader>
+			<band height="32">
+				<textField>
+					<reportElement uuid="4e971e3e-5f58-490b-a504-f35cadaa790a" x="11" y="3" width="200" height="14"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SEMANA NRO:  "+$F{SEMANA}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="7966ee08-3dc6-481f-9c32-ffb0bc93fb24" x="86" y="19" width="60" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b53a1043-f21e-4ad5-ac55-d260cdfef931" x="159" y="19" width="81" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HORA DE ENTRADA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f887d00a-0df2-4a2d-a57b-e7b43ed8e666" x="250" y="19" width="76" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HORA DE SALIDA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3d9d1d98-cd94-44ae-ae67-22bce3615a23" x="340" y="19" width="98" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HORAS TRABAJADAS]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<line>
+					<reportElement uuid="571129b8-19f4-4b4f-b001-1d28fc727ed3" x="86" y="0" width="352" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="b8995da2-8a21-458e-a038-cabc31b82571" x="180" y="3" width="128" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL DE HORA POR SEMANA:]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="b5fe9ffc-957d-4622-9754-e2d160ed8cb7" x="0" y="16" width="555" height="1"/>
+				</line>
+				<textField>
+					<reportElement uuid="045d6eeb-82fc-4a79-8324-eb82f2f1b129" x="340" y="3" width="98" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{HORAS_TRAB_TOTAL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="165">
+			<textField>
+				<reportElement uuid="e7296a72-6022-4e18-8530-d56e3b3b2e69" x="100" y="50" width="455" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="07364046-07af-47a6-900e-b51a7a19416c" x="0" y="1" width="53" height="18"/>
+				<textElement/>
+				<text><![CDATA[SENAMHI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d23a4229-9f2b-4f02-b9c2-234243741c4f" x="75" y="92" width="11" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b815dcc1-4e44-4dd5-bacf-cef747a3c1d0" x="0" y="139" width="555" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Del " + $P{P_FECHA_INI} + " al " + $P{P_FECHA_FIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="60091e3d-63dd-4d0c-9b03-e0992a03d638" x="0" y="92" width="75" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dependencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b0f6601-586d-4395-82b5-ab93360db615" x="75" y="72" width="11" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7de27321-4e2b-4399-9d90-d97ed52fd341" x="0" y="72" width="63" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c9c2833c-e1e3-4dd1-8839-416d9ea91c2a" x="100" y="92" width="455" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPEN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f1583c40-f9b2-4c9e-80db-eef647922704" x="0" y="19" width="555" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO DE REGISTRO DE MARCACIONES DEL PRACTICANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56d254d4-52e6-49c4-b204-aacdcfe0133a" x="0" y="50" width="63" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="68706ced-f468-48a7-a8c5-5bded75feec0" x="0" y="159" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="026c3fe8-c4d8-4a14-abd0-a1e7d75d9ceb" x="75" y="50" width="11" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3b266766-8c84-4655-a5b3-b87f1a5caaf7" x="100" y="72" width="455" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="518dbdc0-4794-4a5d-8b12-473ad39d5e94" x="100" y="112" width="455" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9e82f4f4-89dd-43a7-9de7-6a3e67055321" x="0" y="112" width="75" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="747c9de2-49a6-4c9c-b2f5-33dc3c233985" x="75" y="112" width="11" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1f32c4e3-5f2e-4e5a-970f-b9480ae3f2cf" x="86" y="0" width="60" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{D_FEC_EMP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a390c762-a6bd-4ae7-8678-3835cb8e0ad4" x="159" y="0" width="81" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{H_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c98e42c-49ed-4437-81fa-8ad0bdccd8ef" x="250" y="0" width="76" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{H_SALIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="54c48a5c-1558-442e-829e-6a34f0dd4a13" x="340" y="0" width="98" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HORAS_TRAB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
