@@ -1,0 +1,82 @@
+<style>
+  #top {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    line-height: 10px;
+    font-size: 12px;
+  }
+
+  #calendar {
+    max-width: 90%;
+    margin: 5px auto;
+    padding: 20px;
+  }
+  
+#modal_clientes_clase_registro{
+    /*height: 600px;
+    top: calc(50% - 200px) !important;*/
+}
+</style>
+
+<!-- --------------   Modal --------------  -->
+  <div class="modal fade" id="modal_clientes_clase_registro" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="lb_disciplina"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>          
+        </div>
+        <div class="modal-body">
+        	<input type="hidden" id="hd_id_clase" value="">
+            <div class="row">
+				<div class="col-md-2"><p class="font-weight-bold">Instructor:</p></div>
+				<div class="col-md-4" ><p id="lb_instructor" ></p> </div>
+				<div class="col-md-1"> <p class="font-weight-bold">Sala: </p></div>
+				<div class="col-md-3" ><p id="lb_sala" ></p> </div>
+				<div class="col-md-1"> <p class="font-weight-bold">Aforo: </p></div>
+				<div class="col-md-1" ><p id="lb_aforo" ></p> </div>
+			</div>			
+			<div class="row">
+				<div class="col-md-2"><p class="font-weight-bold">Alumnos:</p></div>
+				<div class="col-md-10 input-field"  >
+						<select id="cb_alumnos_reg_clase" class="selectpicker"  data-size="10" multiple data-live-search="true" data-width="95%" data-actions-box="false" >
+						  
+						</select>
+				</div>
+			</div>
+			
+			<div class="row">
+			    <div class="input-field col-sm-1"></div> 
+			    <div class="col-sm-11">   
+			        <div id="asistencia_tbl_alumnos_clase" >
+			            
+			        </div>
+			    </div>
+			</div>
+        </div>
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--        </div>-->
+      </div>
+      
+    </div>
+  </div>
+<!-- --------------   Modal --------------  -->
+<div class="blue-gradient z-depth-2">
+	<div class="page-header" >
+		<h1 style="padding: 15px">Asistencia de Clientes</h1> 
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-12">
+		<div class="card" id='calendar'></div>
+	</div>
+</div>
+
+<script>
+	asistencia_index();
+</script>

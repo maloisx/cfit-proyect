@@ -507,6 +507,42 @@ public function SetTitlePag($title) {
 		}
 		echo '</ul>';
 	}
+	
+	public function menu_buscar_hijos_boostrap($datos_menu,$codmenu){
+		
+		$url = $this->util()->getPath();
+		
+		
+		for($i=0;$i<count($datos_menu);$i++){	
+							
+			$cod_obj = $datos_menu[$i]->cod_menu;
+		    $desc_obj = $datos_menu[$i]->desc_menu;
+		    $cod_obj_padre =  $datos_menu[$i]->cod_padre;
+		    $url_obj = $datos_menu[$i]->url;
+		    
+		    $orden = $datos_menu[$i]->orden;
+		    $cant_hijos = $datos_menu[$i]->hijos;
+		    
+			if($codmenu == $cod_obj_padre){				
+				$cod_obj_padre = (($codmenu=='0')?'sidebar': 'menu'.$cod_obj_padre) ;				
+				if($cant_hijos>0){
+					echo '<a href="#menu'.$cod_obj.'" class="list-group-item collapsed" data-toggle="collapse" data-parent="#'.$cod_obj_padre.'" aria-expanded="false"><i class="fa fa-list"></i> <span class="hidden-sm-down">'.$desc_obj.'</span> </a>';
+					echo '<div class="collapse" id="menu'.$cod_obj.'">';
+						$this->util()->menu_buscar_hijos_boostrap($datos_menu,$cod_obj);	
+					echo '</div>';
+				}else{
+					echo '<a href="'.$url.$url_obj.'" class="list-group-item collapsed" data-parent="#'.$cod_obj_padre.'"><i class=""></i> <span class="hidden-sm-down">'.$desc_obj.'</span></a>';
+				}							
+			}
+			
+			
+			
+			
+		}
+			if($codmenu=='0'){
+				echo '<a href="'.$url.'index.php/logeo/logout" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-sign-out"></i> <span class="hidden-sm-down">Salir</span></a>';
+			}
+	}
     
     
 }

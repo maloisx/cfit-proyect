@@ -1,17 +1,43 @@
 <?php $url = $this->util()->getPath();
 $ddatosuserlog = new Zend_Session_Namespace('datosuserlog');
 $codemp = $ddatosuserlog->codemp;
+$nompers = $ddatosuserlog->nombre . ' '. $ddatosuserlog->apepat . ' ' . $ddatosuserlog->apemat;
+
 $ns = 'sp_menu';
 $arraydatos[] = $codemp;
 $cn = new Model_DataAdapter();
 $datos_menu = $cn->ejec_store_procedura_mysql($ns,$arraydatos);
 //echo $codemp;
 ?>
-<div id="fondo" style="height: 100%">
-<div style="height: 67px" align="center">
-	<img src="<?php echo $this->util()->getImage("logo.png"); ?>" height="67px">
-</div>	
+<div id="" style="height: 100%">
+<!--<div style="height: 67px" align="center">-->
+<!--	<img src="<?php echo $this->util()->getImage("logo.png"); ?>" height="67px">-->
+<!--</div>	-->
+
+	<div class="card testimonial-card">
+
+                        <!--Bacground color-->
+                        <div class="card-up blue-gradient z-depth-2">
+                        </div>
+
+                        <!--Avatar-->
+                        <div class="avatar mx-auto white">
+                            <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle">
+                        </div>
+
+                        <div class="card-body">
+                            <!--Name-->
+                            <h4 class="card-title"><?php echo $nompers; ?></h4>
+                            <hr>
+                            <!--Quotation-->
+                            <p>XX CARGO XX</p>
+                        </div>
+
+                    </div>
+
+	
+	</hr>
 	<nav id="menu-wrap">  				
-			<?php  $this->util()->menu_buscar_hijos($datos_menu,'0'); ?>
+		<?php  $this->util()->menu_buscar_hijos_boostrap($datos_menu,'0'); ?>
 	</nav>
 </div>

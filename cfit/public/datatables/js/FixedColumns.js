@@ -96,7 +96,8 @@ FixedColumns = function ( oDT, oInit ) {
 		 *  @default  Automatically calculated
 		 *  @readonly
 		 */
-		"bOldIE": ($.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0"))
+//		"bOldIE": ($.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0"))
+                "bOldIE": false
 	};
 	
 	
